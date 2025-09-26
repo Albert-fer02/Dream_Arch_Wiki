@@ -30,11 +30,26 @@ const styleConfig = {
 const InfoBox: React.FC<InfoBoxProps> = ({ type, title, children }) => {
   const { icon, borderColor, bgColor } = styleConfig[type];
 
+  const getAriaRole = () => {
+    switch (type) {
+      case 'warning':
+        return 'alert';
+      case 'tip':
+        return 'status';
+      default:
+        return 'region';
+    }
+  };
+
   return (
-    <div className={`p-4 rounded-lg border-l-4 ${borderColor} ${bgColor} flex space-x-4`}>
-      <div className="flex-shrink-0 pt-1">{icon}</div>
+    <div
+      className={`p-4 rounded-lg border-l-4 ${borderColor} ${bgColor} flex space-x-4`}
+      role={getAriaRole()}
+      aria-labelledby={`info-box-title-${type}`}
+    >
+      <div className="flex-shrink-0 pt-1" aria-hidden="true">{icon}</div>
       <div>
-        <h4 className="font-bold text-slate-100">{title}</h4>
+        <h4 id={`info-box-title-${type}`} className="font-bold text-slate-100">{title}</h4>
         <div className="text-slate-300 text-sm mt-1">{children}</div>
       </div>
     </div>

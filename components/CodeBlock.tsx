@@ -39,13 +39,14 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ title, code, language }) => {
         <h4 className="text-sm font-semibold text-slate-300">{title}</h4>
         <button
           onClick={handleCopy}
-          className="flex items-center space-x-2 text-sm text-slate-400 hover:text-white transition"
+          className="flex items-center space-x-2 text-sm text-slate-400 hover:text-white transition focus:outline-none focus:ring-2 focus:ring-cyan-400 rounded px-2 py-1"
+          aria-label={copied ? 'Code copied to clipboard' : 'Copy code to clipboard'}
         >
-          {copied ? <CheckIcon className="w-4 h-4 text-green-400" /> : <CopyIcon className="w-4 h-4" />}
+          {copied ? <CheckIcon className="w-4 h-4 text-green-400" aria-hidden="true" /> : <CopyIcon className="w-4 h-4" aria-hidden="true" />}
           <span>{copied ? 'Copied!' : 'Copy'}</span>
         </button>
       </div>
-      <pre className="p-4 text-sm overflow-x-auto">
+      <pre className="p-4 text-sm overflow-x-auto" role="region" aria-label={`Code example: ${title}`}>
         <code>
           {code.split('\n').map((line, i) => (
             <div key={i}>{highlightSyntax(line)}</div>
