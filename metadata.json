@@ -1,0 +1,5 @@
+{
+  "name": "Arch Wiki UI Clone",
+  "description": "A responsive and visually appealing clone of a wiki interface, inspired by the Arch Wiki design. Built with React, TypeScript, and Tailwind CSS.",
+  "requestFramePermissions": []
+}
